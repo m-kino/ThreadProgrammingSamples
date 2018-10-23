@@ -19,9 +19,8 @@ package jp.co.primebrains;
 public class Main {
     public static void main(String[] args) {
         RequestQueue queue = new RequestQueue();
-        new ClientThread(queue, "Alice", 111111L).start();
-        sleep(1000);
-        new ServerThread(queue, "Bobby", 333333L).start();
+        new ClientThread(queue, "Alice", 3141592L).start();
+        new ServerThread(queue, "Bobby", 6535897L).start();
 
     }
 

@@ -21,12 +21,20 @@ import java.util.LinkedList;
 public class RequestQueue {
     private LinkedList<Request> queue = new LinkedList<Request>();
 
-    public Request getRequest() {
+    public synchronized Request getRequest() {
+        if (queue.size() <= 0) {
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         return queue.removeFirst();
     }
 
-    public void putRequest(Request request) {
+    public synchronized void putRequest(Request request) {
         queue.addLast(request);
+        this.notifyAll();
     }
 
 }
