@@ -19,9 +19,8 @@ public class ServerThread extends Thread{
 	@Override
 	public void run() {
 		for(int i = 0; i < 10000; i++) {
-			Request request = new Request(String.format("No.%s", i));
+			Request request = queue.getRequest();
 			log.info("取り出しました{}",request);
-			queue.putRequest(request);
 			sleep(random.nextInt(1000));
 		}
 	}

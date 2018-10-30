@@ -6,7 +6,7 @@ public class RequestQueue {
 
 	private LinkedList<Request> queueList = new LinkedList<Request>();
 
-	public void putRequest(Request request) {
+	public synchronized void  putRequest(Request request) {
 		queueList.add(request);
 		this.notifyAll();
 	}
@@ -16,10 +16,14 @@ public class RequestQueue {
 			try {
 				this.wait();
 			}catch(InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
 
 		return queueList.removeFirst();
 	}
+
+
+
 
 }
