@@ -9,7 +9,12 @@ mvn clean eclipse:clean eclipse:eclipse
 Future パタン
 
 IData インタフェース作成
+RealData クラス作成
 
+Host クラス作成
+Main クラス作成
+
+遅いので改善したい
 
 
 
