@@ -26,6 +26,15 @@ public class Host {
 
         IData data = new RealData(count, c);
 
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                IData data = new RealData(count, c);
+//                // ...???
+//                // 戻り値返せない。。。
+//            }
+//        }.start();
+
         log.debug("request :{},{} 終了", count, c);
         return data;
     }
