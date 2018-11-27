@@ -12,17 +12,33 @@
 
 package jp.co.primebrains.future;
 
-
 /**
  * @author Masatomi KINO
  * @version $Revision$
  */
 public class FutureData implements IData {
+    // IDataでも、イイかも。
+    private RealData realData;
+
+    private boolean ready = false;
+
+    // setIDataでも、イイかも。
+    public synchronized void setRealData(RealData realData) {
+        this.realData = realData;
+        ready = true;
+        notifyAll();
+    }
 
     @Override
-    public String getContent() {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+    public synchronized String getContent() {
+        while (!ready) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return realData.getContent();
     }
 
 }
