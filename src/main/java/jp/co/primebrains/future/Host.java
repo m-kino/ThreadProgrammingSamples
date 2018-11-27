@@ -20,23 +20,20 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class Host {
-    public IData request(int count, char c) {
-
+    public IData request(final int count, final char c) {
         log.debug("request :{},{} 開始", count, c);
 
-        IData data = new RealData(count, c);
-
-//        new Thread() {
-//            @Override
-//            public void run() {
-//                IData data = new RealData(count, c);
-//                // ...???
-//                // 戻り値返せない。。。
-//            }
-//        }.start();
-
+        final FutureData futureData = new FutureData();
+        new Thread() {
+            @Override
+            public void run() {
+                RealData data = new RealData(count, c);
+                // setIDataでも、イイかも。
+                futureData.setRealData(data);
+            }
+        }.start();
         log.debug("request :{},{} 終了", count, c);
-        return data;
+        return futureData;
     }
 
 }
